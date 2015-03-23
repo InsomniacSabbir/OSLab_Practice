@@ -39,6 +39,7 @@ int main()
         ob[i].first_arrival=ob[i].arrival;
         printf("Give the burst time of process %d: ",i);
         scanf("%d",&ob[i].burst);
+        ob[i].waiting=0;
         if(ob[i].arrival>maximum)
         {
             maximum=ob[i].arrival;
@@ -92,6 +93,7 @@ int main()
             printf("Processing process %d\ttime %d\n",temp.serial,time);
             if(j==quantum && j!=temp.burst)
             {
+
                 ob[temp.serial].burst-=quantum;
                 ob[temp.serial].waiting+=(ob[temp.serial].execution_start - ob[temp.serial].arrival);
                 ob[temp.serial].arrival=time;
@@ -107,25 +109,28 @@ int main()
             }
             else if(j!=quantum && j==temp.burst)
             {
-                ob[temp.serial].waiting=(ob[temp.serial].execution_start - ob[temp.serial].arrival);
+                ob[temp.serial].waiting+=(ob[temp.serial].execution_start - ob[temp.serial].arrival);
                 ob[temp.serial].burst=0;
                 ob[temp.serial].finish=time;
                 ob[temp.serial].arrival=time;
                 j+=temp.burst+5;
             }
         }
+        //cout<<"waiting time for process "<<temp.serial<<" is "<<ob[temp.serial].waiting<<endl;
+        //cout<<i<<" "<<time<<" "<<maximum<<endl;
         for(i=i+1;i<=time;i++)
         {
             if(i<=maximum)
             {
                 for(k=0;k<V[i].size();k++)
                 {
+                    //cout<<"i = "<<i<<endl;
                     //cout<<"serial: "<<V[i][k].serial<<" arrival time: "<<V[i][k].arrival<<endl;
                     ready_queue.push(V[i][k]);
                 }
             }
         }
-
+        i--;
         if(ob[temp.serial].burst!=0)
         {
                 ready_queue.push(ob[temp.serial]);
