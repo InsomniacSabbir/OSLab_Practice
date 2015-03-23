@@ -102,7 +102,7 @@ int main()
                 ob[temp.serial].burst=0;
                 ob[temp.serial].waiting+=(ob[temp.serial].execution_start - ob[temp.serial].arrival);
                 ob[temp.serial].arrival=time;
-                j+=temp.burst;
+                j+=temp.burst+5;
                 ob[temp.serial].finish=time;
             }
             else if(j!=quantum && j==temp.burst)
@@ -111,11 +111,9 @@ int main()
                 ob[temp.serial].burst=0;
                 ob[temp.serial].finish=time;
                 ob[temp.serial].arrival=time;
-                j+=temp.burst;
+                j+=temp.burst+5;
             }
         }
-        if(ob[temp.serial].burst!=0)
-            ready_queue.push(ob[temp.serial]);
         for(i=i+1;i<=time;i++)
         {
             if(i<=maximum)
@@ -126,6 +124,12 @@ int main()
                     ready_queue.push(V[i][k]);
                 }
             }
+        }
+
+        if(ob[temp.serial].burst!=0)
+        {
+                ready_queue.push(ob[temp.serial]);
+
         }
     }
     maximum_time=time;
