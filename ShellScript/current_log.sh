@@ -1,7 +1,7 @@
 #!/bin/bash
-echo -e "User name : $USER ( Login Name: $LOGNAME)"
-echo -e "Current Shell: $SHELL"
-echo -e "Home Dir: $HOME"
-echo -e "Your OS type: $OSTYPE"
-echo -e "PATH: $PATH"
-echo -e "Current Dir: `pwd`"
+echo  "User name : $USER ( Login Name: $LOGNAME)"
+echo  "Current Shell: $SHELL"
+echo  "Home Dir: $HOME"
+echo  "Your OS type: $OSTYPE"
+echo  "PATH: $PATH"
+echo  "Current Dir: `pwd`"
